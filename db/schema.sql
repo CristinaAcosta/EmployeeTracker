@@ -8,7 +8,6 @@ CREATE TABLE department (
     name VARCHAR(30) UNIQUE NOT NULL 
 );
 
-
 CREATE TABLE role (
     id INT UNSIGNED AUTO_INCREMENT Primary Key,
     title VARCHAR(30) UNIQUE NOT NULL, 
@@ -23,4 +22,3 @@ CREATE TABLE employee(
     role_id INT UNSIGNED NOT NULL,
     manager_id INT UNSIGNED
 );
-
