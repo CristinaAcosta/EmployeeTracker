@@ -62,6 +62,47 @@ viewDepartment()
     'SELECT name FROM employees.department;'
     );
 
+function addEmployees(){
+    inquirer
+    .prompt([
+        {
+            name:empFirstName,
+            type: "input",
+            message: "What is the new employees first name?"
+        },
+        {
+            name:empLasttName,
+            type: "input",
+            message: "What is the new employees last name?"
+        },
+        {
+            name:empDept,
+            type: "input",
+            message: "What is the new employees department name?",
+            choices: ['Finance', 'Marketing', 'Human Resource']
+        },
+        {
+            name:empSalary,
+            type: "input",
+            message: "What is the new employees salary?"
+        },
+        {
+            name:empManager,
+            type: "input",
+            message: "Who is the new employees manager?",
+            choices: ['John Stripes', 'Samantha Jones', 'Terry Cast']
+        },
+        {
+            name:empRole,
+            type: "input",
+            message: "What is the new employees role?",
+            choices:['Accountant','Data Scientist', 'Marketing', 'Human Resources']
+        }
+    ])
+    .then(function(answer){
+        
+    })
+}
     //createEmployee()
     //Create Dept.
     //createRole()
