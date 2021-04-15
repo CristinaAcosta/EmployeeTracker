@@ -8,6 +8,7 @@ class data {
     constructor(connection) {
         this.connection = connection;
     }
+  }
 // Ask to get all employees  
 function search(){
     inquirer 
@@ -120,7 +121,7 @@ function addEmployees(){
           }
 
           var query = connection.query(
-              "INSERT INTO employee SET ?",
+              "INSERT INTO employee SET",
              {
                 first_name: answer.empFirstName,
                 last_name: answer.empLastName,
@@ -136,6 +137,7 @@ function addEmployees(){
     function updateEmpRole() {
         return this.connection.query('SELECT employee.id, employee.first_name, employee.last_name, department.dept_name, employee.roles_id, roles.title FROM employee INNER JOIN roles ON employee.role_id = role.id INNER JOIN department ON role.department_id = department.dept_name;'
         
+        )}
 
         inquirer
           .prompt([
@@ -164,9 +166,7 @@ function addEmployees(){
           updateToChosenRole(answer);
           return answer;
           })
-        })  
-      }
-    
+          
       function updateToChosenRole(answer) {
         newRoleId = "";
         newDept = "";
@@ -195,7 +195,7 @@ function addEmployees(){
     
         
         connection.query(
-          "UPDATE employee SET ? WHERE ?",
+          "UPDATE employee SET WHERE ",
           [
             {
               role_id: newRoleId,
@@ -207,7 +207,6 @@ function addEmployees(){
             }
           ],
          
-          }
         )
       };
 
