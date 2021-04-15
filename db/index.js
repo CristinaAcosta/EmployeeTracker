@@ -71,7 +71,7 @@ function addEmployees(){
             message: "What is the new employees first name?"
         },
         {
-            name:empLasttName,
+            name:empLastName,
             type: "input",
             message: "What is the new employees last name?"
         },
@@ -96,11 +96,45 @@ function addEmployees(){
             name:empRole,
             type: "input",
             message: "What is the new employees role?",
-            choices:['Accountant','Data Scientist', 'Marketing', 'Human Resources']
+            choices:['Accountant','Data Scientist', 'Marketing', 'HR Representative']
         }
     ])
     .then(function(answer){
-        
+        var newDept = ""
+        if (answer.newDept === "Finance") {
+          newDept = 1;
+        }
+        if (answer.newDept === "Marketing") {
+            newDept = 2;
+          }
+        if (answer.newDept === "Human Resource") {
+            newDept = 3;
+          }
+        var newRole = ""
+          if (answer.newRole === "Accountant") {
+            newRole = 1;
+          }
+          if (answer.newRole === "Data Scientist") {
+            newRole = 2;
+          }
+          if (answer.newRole === "Social Media") {
+            newRole = 3;
+          }
+          if (answer.newRole === "HR Representative") {
+            newRole = 4;
+          }
+
+          var query = connection.query(
+              "INSERT INTO employee SET",
+             {
+                first_name: answer.empFirstName,
+                last_name: answer.empLastName,
+                dept_name: answer.empDept,
+                salary: answer.empSalary,
+                roles_id: answer.empRole,
+                manager_name: answer.empManager
+             } 
+          )
     })
 }
     //createEmployee()
