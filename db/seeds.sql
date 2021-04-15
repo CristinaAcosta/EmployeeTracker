@@ -19,5 +19,5 @@ VALUES
 ('Rachel', 'Roy', 2, 'Samantha Jones')
 ('Kit', 'Aid', 2 , 'Samantha Jones')
 ('Bial', 'Etti', 3 , 'Terry Cast')
-('Calph', 'Alon', 3,'Terry Cast')
+('Calph', 'Alon', 3,'Terry Cast');
 

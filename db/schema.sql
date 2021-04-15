@@ -22,4 +22,4 @@ CREATE TABLE employee(
     last_name VARCHAR(50) NOT NULL,
     role_id INT UNSIGNED NOT NULL,
     manager_name VARCHAR(50) 
-)
+);
