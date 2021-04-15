@@ -120,7 +120,7 @@ function addEmployees(){
           }
 
           var query = connection.query(
-              "INSERT INTO employee SET",
+              "INSERT INTO employee SET ?",
              {
                 first_name: answer.empFirstName,
                 last_name: answer.empLastName,
@@ -133,5 +133,81 @@ function addEmployees(){
     })
 }
     // Update employee and roles 
+    function updateEmpRole() {
+        return this.connection.query('SELECT employee.id, employee.first_name, employee.last_name, department.dept_name, employee.roles_id, roles.title FROM employee INNER JOIN roles ON employee.role_id = role.id INNER JOIN department ON role.department_id = department.dept_name;'
+        
 
+        inquirer
+          .prompt([
+            {
+              name: "choice",
+              type: "rawlist",
+              message: "Which role would you like to update?",
+              choices: function() {
+                let choiceArray = [];
+                  for (let i=1; i < results.length; i++) {
+                  let emp = ""; 
+                  emp = `${results[i].id} ${results[i].first_name} ${results[i].last_name} ${results[i].dept_name} ${results[i].roles_id} ${results[i].title}`
+                  choiceArray.push(emp)
+                }
+              return choiceArray;
+              }
+            },
+            {
+              name: "employeeUpdate",
+              type: "list",
+              message: "What role would you like to update this employee to?",
+              choices: ['Accountant', 'Data Scientist', 'Social Media', 'HR Representative']
+            }
+          ])
+          .then(function(answer) {
+          updateToChosenRole(answer);
+          return answer;
+          })
+        })  
+      }
+    
+      function updateToChosenRole(answer) {
+        newRoleId = "";
+        newDept = "";
+        newMgr = "";
+    
+        if (answer.roleUpdate === 'Accountant') {
+          newRoleId = 1;
+          newDept = 'Finance';
+          newMgr = 'John Stripe';
+        }
+        if (answer.roleUpdate === 'Data Scientist') {
+         newRoleId = 2;
+         newDept = 'Marketing';
+         newMgr = 'Samantha Jones';
+        }
+        if (answer.roleUpdate === 'Social Media') {
+         newRoleId = 2;
+         newDept = 'Marketing';
+         newMgr = 'Samantha Jones';
+        }
+        if (answer.roleUpdate === 'HR Representative') {
+         newRoleId = 3;
+         newDept = 'Human Resource';
+         newMgr = 'Terry Cast';
+        }
+    
+        
+        connection.query(
+          "UPDATE employee SET ? WHERE ?",
+          [
+            {
+              role_id: newRoleId,
+              dept_name: newDept, 
+              manager_name: newMgr
+            },
+            {
+              id: parseInt(choiceStr[0])
+            }
+          ],
+         
+          }
+        )
+      };
 

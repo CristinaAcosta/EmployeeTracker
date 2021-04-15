@@ -1,6 +1,6 @@
 USE employees;
 
-INSERT INTO department(name)
+INSERT INTO department(dept_name)
 VALUES
 ('Finance'),
 ('Marketing'),
