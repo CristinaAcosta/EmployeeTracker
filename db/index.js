@@ -10,7 +10,7 @@ class data {
     }
   }
 // Ask to get all employees  
-function search(){
+function search() {
     inquirer 
     .prompt({
         name:"task",
@@ -58,7 +58,7 @@ viewDepartment()
     );
 
 // Create employee, role, and dept 
-function addEmployees(){
+function addEmployees() {
     inquirer
     .prompt([
         {
@@ -96,7 +96,7 @@ function addEmployees(){
         }
     ])
     .then(function(answer){
-        var newDept = ""
+        var newDept = " "
         if (answer.newDept === "Finance") {
           newDept = 1;
         }
