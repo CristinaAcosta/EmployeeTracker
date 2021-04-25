@@ -21,7 +21,7 @@ function search() {
         switch (answer.task) {
           case "View all employees.":
             return viewEmployees();
-        //Views all Dept
+        //View departments
           case "View departments.":
             return viewDepartments();
         // View roles 
@@ -212,6 +212,21 @@ connection.query(
     search()
   }
   
+    
+  async function addEmployees() {
+    const roles = await db.findAllRoles()
+    console.log("\n")
+    console.table(roles); 
+    search()
+  }
+
+    
+  async function updates() {
+    const roles = await db.findAllRoles()
+    console.log("\n")
+    console.table(roles); 
+    search()
+  }
 function quit(){
     consol.log("Thank you!");
     process.exit();
