@@ -1,6 +1,7 @@
 const connection = require("./db/connection.js");
 const db = require("./db");
-require("console.table")
+const inquirer = require("inquirer");
+require ("console.table")
 
 // this would have your switch cases & vanilla js 
 // Ask to get all employees
@@ -14,7 +15,7 @@ function search() {
         name: "task",
         type: "list",
         message: "What would you like to select.",
-        Choices: ["View all employees.", "Create new employee.", "Create new department.", "Create new role.", "View departments.", "View roles.", "View employees.", "Update employee role.", "Update employee status."]
+        choices: ["View all employees.", "Create new employee.", "Create new department.", "Create new role.", "View departments.", "View roles.", "View employees.", "Update employee role.", "Update employee status."]
       })
       .then(function (answer) {
     // Views all employees
@@ -34,6 +35,8 @@ function search() {
           case "Update employees.":
               return updates();
             // add more cases 
+            case "Update roles.":
+              return updateToChosenRole();
           default:
             return quit();
         }
@@ -78,7 +81,7 @@ function addEmployees() {
         }
       ])
       .then(function(answer) {
-        var newDept = " "
+        var newDept = "";
         if (answer.newDept === "Finance") {
           newDept = 1;
         }
@@ -87,8 +90,8 @@ function addEmployees() {
         }
         if (answer.newDept === "Human Resource") {
           newDept = 3;
-        }
-        var newRole = ""
+        };
+        var newRole = "";
         if (answer.newRole === "Accountant") {
           newRole = 1;
         }
@@ -174,24 +177,12 @@ if (answer.roleUpdate === 'HR Representative') {
   newMgr = 'Terry Cast';
 }
 
+}
 
-connection.query(
-  "UPDATE employee SET WHERE ",
-  [
-    {
-      role_id: newRoleId,
-      dept_name: newDept,
-      manager_name: newMgr
-    },
-
-  ],
-
-)
-};
 
   // List of vanilla js function 
   async function viewEmployees() {
-    const employees = await db.findAllEmployees();
+    const employees = await db.viewEmployees();
     console.log("\n");
     console.table(employees);
     search();
@@ -199,36 +190,44 @@ connection.query(
   }
   
   async function viewDepartments() {
-    const departments = await db.findAllDepartment();
+    const departments = await db.viewDepartments();
     console.log("\n");
     console.table(departments);
     search()
   }
   
   async function viewRoles() {
-    const roles = await db.findAllRoles()
+    const roles = await db.viewRoles()
+    console.log("\n")
+    console.table(roles); 
+    search()
+  }
+    
+  async function addEmployees() {
+    const roles = await db.viewRoles()
     console.log("\n")
     console.table(roles); 
     search()
   }
   
-    
-  async function addEmployees() {
-    const roles = await db.findAllRoles()
+  
+  async function updates() {
+    const roles = await db.viewEmployees()
     console.log("\n")
     console.table(roles); 
     search()
   }
 
-    
-  async function updates() {
-    const roles = await db.findAllRoles()
+  async function updateToChosenRole() {
+    const roles = await db.viewRoles()
     console.log("\n")
     console.table(roles); 
     search()
   }
+
 function quit(){
-    consol.log("Thank you!");
+    console.log("Thank you!");
     process.exit();
   }
 
+search() 
