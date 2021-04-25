@@ -15,9 +15,4 @@ connection.connect();
 connection.query = util.promisify(connection.query);
 
 
-connection.connect((err) => {
-   if (err) throw err;
-   search();
-  });
-
 module.exports = connection;

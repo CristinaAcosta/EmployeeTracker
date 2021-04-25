@@ -102,7 +102,7 @@ function addEmployees() {
           newRole = 4;
         }
   
-        var query = connection.query(
+        connection.query(
           "INSERT INTO employee SET",
           {
             first_name: answer.empFirstName,
